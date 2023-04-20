@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- directory 선언. 파일로 저장. 저장 경로 : value="./logs" 지정시, logs 폴더 생성하여 저장 -->
+    <property name="LOGS_ABSOLUTE_PATH" value="./logs" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- file 선언. 용량, 기간에 따라 파일 저장 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_ABSOLUTE_PATH}/logback.log</file>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS_ABSOLUTE_PATH}/logback.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- standard out
+        INFO(trace > debug > info > warn > error)
+        level="ERROR"로 설정시, 에러가 발생하지 않으면 화면에 출력되지 않음. 실제 서비스시 ERROR 로 설정해야 함-->
+    <root level="ERROR">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <!-- web 으로 실행시, STDOUT 출력 및 파일 저장 -->
+    <logger name="org.springframework.web" level="DEBUG">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
+    <!--
+    <logger name="jdbc" level="OFF" />
+	<logger name="jdbc.sqlonly" level="DEBUG" />
+	<logger name="jdbc.sqltiming" level="DEBUG" />
+	<logger name="jdbc.audit" level="OFF" />
+	<logger name="jdbc.resultset" level="DEBUG" />
+	<logger name="jdbc.resultsettable" level="DEBUG" />
+	<logger name="jdbc.connection" level="OFF" />
+	-->
+</configuration>
