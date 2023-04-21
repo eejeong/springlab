@@ -27,7 +27,7 @@
     <!-- standard out
         INFO(trace > debug > info > warn > error)
         level="ERROR"로 설정시, 에러가 발생하지 않으면 화면에 출력되지 않음. 실제 서비스시 ERROR 로 설정해야 함-->
-    <root level="ERROR">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
 
