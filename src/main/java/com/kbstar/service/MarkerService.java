@@ -45,4 +45,8 @@ public class MarkerService implements KBService<Integer, Marker> {
     public List<Marker> get() throws Exception {
         return mapper.selectall();
     }
+
+    public List<Marker> getLoc(String loc) throws  Exception {
+        return mapper.getloc(loc);
+    }
 }

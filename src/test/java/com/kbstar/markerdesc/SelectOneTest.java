@@ -1,28 +1,22 @@
-package com.kbstar.cust;
+package com.kbstar.markerdesc;
 
-import com.kbstar.dto.Cust;
-import com.kbstar.service.CustService;
+import com.kbstar.service.MarkerDescService;
+import com.kbstar.service.MarkerService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
 @Slf4j
 @SpringBootTest
 class SelectOneTest {
     @Autowired
-    CustService service;
+    MarkerDescService service;
 
     @Test
     void contextLoads() {
-        Cust cust = null;
         try {
-            service.get("id77");
-            log.info("-------------------------------");
-            log.info(cust.toString());
-            log.info("-------------------------------");
+            service.get(108);
         } catch (Exception e) {
             log.info("에러...");
         }

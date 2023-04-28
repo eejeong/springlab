@@ -18,7 +18,7 @@ public class CustService implements KBService<String, Cust> {
     @Override
     public void register(Cust cust) throws Exception {
         mapper.insert(cust);
-        mapper.insert(cust);
+        //mapper.insert(cust);
         log.info("Send Mail..."+ cust.getId());
     }
 
