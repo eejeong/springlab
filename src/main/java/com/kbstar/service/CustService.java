@@ -18,26 +18,27 @@ public class CustService implements KBService<String, Cust> {
     @Override
     public void register(Cust cust) throws Exception {
         mapper.insert(cust);
-        log.info("Send Mail ...."+cust.getId());
+        mapper.insert(cust);
+        log.info("Send Mail..."+ cust.getId());
     }
 
     @Override
     public void remove(String s) throws Exception {
-
+        mapper.delete(s);
     }
 
     @Override
     public void modify(Cust cust) throws Exception {
-
+        mapper.update(cust);
     }
 
     @Override
     public Cust get(String s) throws Exception {
-        return null;
+        return mapper.select(s);
     }
 
     @Override
     public List<Cust> get() throws Exception {
-        return null;
+        return mapper.selectall();
     }
 }

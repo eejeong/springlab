@@ -10,22 +10,16 @@ import org.springframework.dao.DuplicateKeyException;
 
 @Slf4j
 @SpringBootTest
-class InsertTest {
+class DeleteTest {
     @Autowired
     CustService service;
 
     @Test
     void contextLoads() {
-        Cust obj = new Cust("id21", "pwd20", "james");
         try{
-            service.register(obj);
-            log.info("등록 정상-----------------------------");
+           service.remove("id10");
         } catch (Exception e){
-            if(e instanceof DuplicateKeyException){
-                log.info("ID가 중복되었습니다.-------------------------");
-            }else{
-                log.info("시스템 장애입니다.----------------------------");
-            }
+            log.info("삭제 오류");
         }
     }
 }
