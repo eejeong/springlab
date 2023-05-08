@@ -26,9 +26,9 @@
           <c:forEach var="obj" items="${cpage.getList()}">
             <tr>
               <td><img class="small_img" src="/uimg/${obj.imgname}"></td>
-              <td>${obj.id}</td>
+              <td><a href="/item/get?id=${obj.id}">${obj.id}</a></td>
               <td>${obj.name}</td>
-              <td><fmt:formatNumber value="${obj.price}" type="currency" /></td>
+              <td><fmt:formatNumber value="${obj.price}" type="currency" currencyCode="KRW" pattern="###,###원"/></td>
               <td><fmt:formatDate value="${obj.rdate}" pattern="yyyy-MM-dd" /></td>
             </tr>
           </c:forEach>

@@ -124,4 +124,16 @@ public class MainController {
         return page;
     }
 
+
+    @RequestMapping("/pic")
+    public String pic(Model model){
+        model.addAttribute("center", "pic");
+        return "index";
+    }
+
+    @RequestMapping("/websocket")
+    public String websocket(Model model){
+        model.addAttribute("center", "websocket");
+        return "index";
+    }
 }
