@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,10 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @Controller
 public class MainController {
+
+    @Value("${adminserver}")
+    String adminserver;
+
     @Autowired
     CustService custService;
 
@@ -133,6 +138,7 @@ public class MainController {
 
     @RequestMapping("/websocket")
     public String websocket(Model model){
+        model.addAttribute("adminserver", adminserver);
         model.addAttribute("center", "websocket");
         return "index";
     }
