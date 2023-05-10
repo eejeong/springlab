@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Slf4j
 @SpringBootTest
-class Web11ApplicationTests {
+class Web15ApplicationTests {
 
     @Autowired
     private BCryptPasswordEncoder encoder;
