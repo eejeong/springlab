@@ -4,31 +4,31 @@
 <style>
     #w2 {
         width: 500px;
-        border:2px solid red;
+        border: 2px solid red;
     }
 </style>
 <script>
     let center = {
-        init:function (){
+        init: function () {
             $.ajax({
-                url:'/weather2',
-                success:function (data){
+                url: '/weather2',
+                success: function (data) {
                     center.display(data);
                 }
             });
-        }, display:function (data){
+        }, display: function (data) {
             var result = data.response.body.items.item;
             var txt = '';
-            $(result).each(function(index,item){
+            $(result).each(function (index, item) {
                 txt += '<h5>';
-                txt += item.tm+' '+item.ta;
+                txt += item.tm + ' ' + item.ta;
                 txt += '</h5>';
             });
             $('#w2').html(txt);
         }
     };
-    $(function (){
-        center.init();
+    $(function () {
+        //center.init();
     });
 </script>
 
