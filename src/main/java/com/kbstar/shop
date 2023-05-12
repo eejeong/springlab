@@ -1,0 +1,104 @@
+DROP TABLE client;
+
+CREATE TABLE client (
+	clientID	varchar(8)		NOT NULL,
+	name	    varchar(5)		NOT NULL,
+	addr	    varchar(100)	NOT NULL,
+	contact 	varchar(11)		NOT NULL
+);
+
+DROP TABLE order1;
+
+CREATE TABLE order1 (
+	Key		    int					NOT NULL,
+	clientID	varchar(8)			NOT NULL,
+	price		VARCHAR(255)	    NOT NULL,
+	status	    varchar(10)			NOT NULL,
+	payMethod	varchar(10)		    NOT NULL,
+	addrInfo	varchar(100)		NOT NULL
+);
+
+DROP TABLE product;
+
+CREATE TABLE product (
+	productID	int			    NOT NULL,
+	name		varchar(10)	    NOT NULL,
+	price		float		    NOT NULL,
+	origin	    varchar(20)		NOT NULL,
+	harvestDate	date			NOT NULL,
+	producer	varchar(10)		NOT NULL,
+	weight	    float			NOT NULL
+);
+
+DROP TABLE order1Detail;
+
+CREATE TABLE order1Detail (
+	KeyDetail	int		NOT NULL,
+	Key2		int		NOT NULL,
+	productID	int		NOT NULL
+);
+
+DROP TABLE basket;
+
+CREATE TABLE basket (
+	num		    int				NOT NULL,
+	clientID	varchar(8)		NOT NULL,
+	productID	int			    NOT NULL
+);
+
+
+
+ALTER TABLE client ADD CONSTRAINT PK_USER PRIMARY KEY (
+	clientID
+);
+
+ALTER TABLE order1 ADD CONSTRAINT PK_ORDER1 PRIMARY KEY (
+	Key
+);
+
+ALTER TABLE product ADD CONSTRAINT PK_PRODUCT PRIMARY KEY (
+	productID
+);
+
+ALTER TABLE order1Detail ADD CONSTRAINT PK_ORDER1DETAIL PRIMARY KEY (
+	KeyDetail
+);
+
+ALTER TABLE basket ADD CONSTRAINT PK_ basket PRIMARY KEY (
+	num
+);
+
+ALTER TABLE order1 ADD CONSTRAINT FK_client_TO_order1_1 FOREIGN KEY (
+	clientID
+)
+REFERENCES user (
+	clientID
+);
+
+ALTER TABLE order1Detail ADD CONSTRAINT FK_order1_TO_order1Detail_1 FOREIGN KEY (
+	Key2
+)
+REFERENCES order1 (
+	Key
+);
+
+ALTER TABLE order1Detail ADD CONSTRAINT FK_product_TO_order1Detail_1 FOREIGN KEY (
+	productID
+)
+REFERENCES product (
+	productID
+);
+
+ALTER TABLE basket ADD CONSTRAINT FK_client_TO_ basket_1 FOREIGN KEY (
+	clientID
+)
+REFERENCES client (
+	clientID
+);
+
+ALTER TABLE basket ADD CONSTRAINT FK_product_TO_ basket_1 FOREIGN KEY (
+	productID
+)
+REFERENCES product (
+	productID
+);
