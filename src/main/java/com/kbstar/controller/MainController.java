@@ -154,4 +154,15 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("/ocr1")
+    public String ocr1(Model model) {
+        model.addAttribute("center", "ocr1");
+        return "index";
+    }
+
+    @RequestMapping("/ocr2")
+    public String ocr2(Model model) {
+        model.addAttribute("center", "ocr2");
+        return "index";
+    }
 }

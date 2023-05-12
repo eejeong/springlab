@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Slf4j
 @SpringBootTest
-class Web16ApplicationTests {
+class Web17ApplicationTests {
 
     @Autowired
     private BCryptPasswordEncoder encoder;
@@ -21,11 +21,10 @@ class Web16ApplicationTests {
         log.info("----------------------------------------------");
         log.info(rawPassword);
         log.info("암호화 된 비번" + encPassword);
-        boolean result = encoder.matches(rawPassword,encPassword);
-        log.info(result+"");
+        boolean result = encoder.matches(rawPassword, encPassword);
+        log.info(result + "");
         log.info("----------------------------------------------");
     }
-
 
 
 }
