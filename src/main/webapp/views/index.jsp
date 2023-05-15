@@ -14,7 +14,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="/js/index0421.js"></script>
     <%--kakao MAP--%>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=186d9ac6e73cf3e121e11e749901f230"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=186d9ac6e73cf3e121e11e749901f230"></script>
     <%--highchart--%>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
@@ -37,7 +38,9 @@
         }
 
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {height: 650px}
+        .row.content {
+            height: 650px
+        }
 
         /* Set gray background color and 100% height */
         .sidenav {
@@ -67,10 +70,12 @@
             font: 2px monospace;
             transition: opacity 2s, transform 2s;
         }
+
         #scroll-btn.show {
             opacity: 1;
             transition: opacity 5s, transform 5s;
         }
+
         #scroll-btn2 {
             opacity: 0;
             width: 50px;
@@ -85,6 +90,7 @@
             font: bold 10px monospace;
             transition: opacity 2s, transform 2s;
         }
+
         #scroll-btn2.show {
             opacity: 1;
             transition: opacity 5s, transform 5s;
@@ -96,35 +102,38 @@
                 height: auto;
                 padding: 15px;
             }
-            .row.content {height:auto;}
+
+            .row.content {
+                height: auto;
+            }
         }
     </style>
-<script>
-    let chatbtn = {
-        init:function(){
-            const scrollBtn = document.createElement("button");
-            scrollBtn.innerHTML = "chatbot";
-            scrollBtn.setAttribute("id", "scroll-btn");
-            document.body.appendChild(scrollBtn);
-            scrollBtn.classList.add("show");
-            scrollBtn.addEventListener("click", function(){
-                location.href='/login';
-            });
-            const scrollBtn2 = document.createElement("button");
-            scrollBtn2.innerHTML = "1:1";
-            scrollBtn2.setAttribute("id", "scroll-btn2");
-            document.body.appendChild(scrollBtn2);
-            scrollBtn2.classList.add("show");
-            scrollBtn2.addEventListener("click", function(){
-                location.href='/login';
-            });
-        }
-    };
+    <script>
+        let chatbtn = {
+            init: function () {
+                const scrollBtn = document.createElement("button");
+                scrollBtn.innerHTML = "chatbot";
+                scrollBtn.setAttribute("id", "scroll-btn");
+                document.body.appendChild(scrollBtn);
+                scrollBtn.classList.add("show");
+                scrollBtn.addEventListener("click", function () {
+                    location.href = '/chatbot';
+                });
+                const scrollBtn2 = document.createElement("button");
+                scrollBtn2.innerHTML = "1:1";
+                scrollBtn2.setAttribute("id", "scroll-btn2");
+                document.body.appendChild(scrollBtn2);
+                scrollBtn2.classList.add("show");
+                scrollBtn2.addEventListener("click", function () {
+                    location.href = '/callcenter';
+                });
+            }
+        };
 
-    $(function(){
-        chatbtn.init();
-    });
-</script>
+        $(function () {
+            chatbtn.init();
+        });
+    </script>
 </head>
 <body>
 
