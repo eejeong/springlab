@@ -35,31 +35,31 @@ public class AjaxImplController {
     String imgdir;
 
     @RequestMapping("/saveimg")
-    public String saveimg(MultipartFile file){
+    public String saveimg(MultipartFile file) {
         String filename = file.getOriginalFilename();
         FileUploadUtil.saveFile(file, imgdir);
         return filename;
     }
 
     @RequestMapping("/getservertime")
-    public Object getservertime(){
+    public Object getservertime() {
         Date date = new Date();
         return date;
     }
 
     @RequestMapping("/checkid")
-    public Object checkid(String id) throws Exception{
+    public Object checkid(String id) throws Exception {
         int result = 0;
         Cust cust = null;
         cust = custService.get(id);
-        if(cust != null) {
+        if (cust != null) {
             result = 1;
         }
         return result;
     }
 
     @RequestMapping("/getdata")
-    public Object getdata(){
+    public Object getdata() {
         List<Cust> list = new ArrayList<>();
         list.add(new Cust("id01", "pwd01", "james1"));
         list.add(new Cust("id02", "pwd02", "james2"));
@@ -71,13 +71,13 @@ public class AjaxImplController {
         //JSON(Javascript Object Notation)
         //JSONArrary = [{},{},{},...]
         JSONArray ja = new JSONArray();
-        for(Cust obj:list){
+        for (Cust obj : list) {
             JSONObject jo = new JSONObject();
             Random r = new Random();
-            int i = r.nextInt(100)+1;
+            int i = r.nextInt(100) + 1;
             jo.put("id", obj.getId());
             jo.put("pwd", obj.getPwd());
-            jo.put("name", obj.getName()+i);
+            jo.put("name", obj.getName() + i);
             ja.add(jo);
             //JSONObject을 JSONArrary에 추가
         }
@@ -94,7 +94,7 @@ public class AjaxImplController {
         }
 
         JSONArray ja = new JSONArray();
-        for(Marker obj:list){
+        for (Marker obj : list) {
             JSONObject jo = new JSONObject();
             jo.put("id", obj.getId());
             jo.put("title", obj.getTitle());
@@ -109,11 +109,11 @@ public class AjaxImplController {
     }
 
     @RequestMapping("/chart05")
-    public Object chart05(String year){
+    public Object chart05(String year) {
         JSONArray ja = new JSONArray();
-        for(int i=1; i<=12; i++){
+        for (int i = 1; i <= 12; i++) {
             Random r = new Random();
-            int num = r.nextInt(100)+1;
+            int num = r.nextInt(100) + 1;
             ja.add(num);
         }
         return ja;
@@ -121,7 +121,7 @@ public class AjaxImplController {
 
 
     @RequestMapping("/addcart")
-    public Object addcart(Cart cart) throws Exception{
+    public Object addcart(Cart cart) throws Exception {
         cartService.register(cart);
         return "";
     }

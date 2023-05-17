@@ -1,108 +1,155 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <script>
     let register_form = {
-        init:function(){
+        init: function () {
             $('#register_btn').addClass('disabled');
 
-            $('#register_btn').click(function(){
+            $("#register_btn").click(function () {
                 register_form.send();
             });
-            $('#name').keyup(function (){
+            $('#name').keyup(function () {
                 var id = $('#id').val();
                 var pwd = $('#pwd').val();
                 var name = $('#name').val();
-                if(id != '' && pwd != '' && name !=''){
+                if (id != '' && pwd != '' && name != '') {
                     $('#register_btn').removeClass('disabled');
                 }
             });
-            $('#id').keyup(function (){
+
+            $('#id').keyup(function () {
                 var txt_id = $(this).val();
-                if(txt_id.length <= 3){
+                if (txt_id.length <= 3) {
                     return;
                 }
                 $.ajax({
-                    url:'/checkid',
-                    data:{'id':txt_id},
-                    success:function (result){
-                        if(result == 0){
-                            $('#check_id').text('사용 가능한 ID 입니다.');
-                            $('#pwd').focus();
+                    url: '/checkid',
+                    data: {id: txt_id},
+                    success: function (result) {
+                        if (result == 0) {
+                            $('#check_id').text('사용가능합니다.');
                         } else {
-                            $('#check_id').text('사용 불가능합니다.');
+                            $('#check_id').text('사용불가능합니다.')
                         }
                     }
                 });
             });
         },
-        send:function(){
+        send: function () {
             var id = $('#id').val();
             var pwd = $('#pwd').val();
             var name = $('#name').val();
-            if(id.length <= 3){
-                $('#check_id').text("ID는 4자리 이상이어야 합니다.");
+            if (id.length <= 3) {
+                $('#check_id').text('4자리 이상이어야 합니다.');
                 $('#id').focus();
                 return;
             }
-            if(pwd == ''){
+            if (pwd == '') {
                 $('#pwd').focus();
                 return;
             }
-            if(name == ''){
+            if (name == '') {
                 $('#name').focus();
                 return;
             }
-
-            $('#register_form').attr({
-                'action':'/registerimpl',
-                'method':'post'
+            $("#register_form").attr({
+                "action": "/registerimpl",
+                "method": "post"
             });
-            $('#register_form').submit();
+            $("#register_form").submit();
         }
-    };
+    }
 
-    $(function(){
+    $(function () {
         register_form.init();
     });
-
 </script>
 
-<div class="col-sm-8 text-center">
+<div class="col-sm-8 text-left">
     <div class="container">
-        <div class="col-sm-6 text-center">
-            <h1 style="text-align: center">Register Page</h1>
-            <br/>
-            <form id="register_form" class="form-horizontal well">
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="id">ID:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="id 입력" id="id" name="id">
-                    </div>
-                    <div class="col-sm-10">
-                        <span id="check_id" class="bg-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="pwd">Password:</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-                    </div>
+        <form id="register_form" class="">
+            <div class="container">
+                <p>Please fill in this form to create an account.</p>
+                <hr>
+
+                <label for="id"><b>ID</b></label>
+                <input type="text" placeholder="Enter ID" name="id" id="id" required>
+
+                <div>
+                    <span id="check_id" class="bg-danger"></span>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="pwd">이름:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
-                    </div>
-                </div>
+                <label for="pwd"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="pwd" id="pwd" required>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button id="register_btn" type="button" class="btn btn-default">Register</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+                <label for="name"><b>Name</b></label>
+                <input type="text" placeholder="Enter Name" name="name" id="name" required>
+                <hr>
+
+                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                <button id="register_btn" type="button" class="registerbtn">Register</button>
+            </div>
+        </form>
     </div>
 </div>
+
+<style>
+    * {
+        box-sizing: border-box
+    }
+
+    /* Add padding to containers */
+    .container {
+        padding: 16px;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Full-width input fields */
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    /* Overwrite default styles of hr */
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* Set a style for the submit/register button */
+    .registerbtn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+    .registerbtn:hover {
+        opacity: 1;
+    }
+
+    /* Add a blue text color to links */
+    a {
+        color: dodgerblue;
+    }
+
+    /* Set a grey background color and center the text of the "sign in" section */
+    .signin {
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+</style>
