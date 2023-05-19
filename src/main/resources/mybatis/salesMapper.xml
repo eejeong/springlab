@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kbstar.mapper.SalesMapper">
+
+    <select id="selectall" resultType="sales">
+        SELECT *
+        FROM sales
+    </select>
+
+    <select id="getdatasales" parameterType="String" resultType="sales">
+        SELECT SUBSTR(TO_CHAR(RDATE, 'YYYYMMDD'), 1, 8) AS RDATE
+             , SUM(PRICE)                               AS PRICE
+        FROM SALES
+        WHERE SUBSTR(TO_CHAR(RDATE, 'YYYYMMDD'), 5, 2) = ${MONTH}
+        GROUP BY SUBSTR(TO_CHAR(RDATE, 'YYYYMMDD'), 1, 8)
+        ORDER BY RDATE
+    </select>
+
+    <select id="getdatasalessum" resultType="sales">
+        SELECT SUBSTR(TO_CHAR(RDATE, 'YYYYMMDD'), 1, 6) AS RDATE
+             , SUM(PRICE) / 1000000                     AS PRICE
+             , GENDER
+        FROM SALES
+        GROUP BY SUBSTR(TO_CHAR(RDATE, 'YYYYMMDD'), 1, 6), GENDER
+        ORDER BY RDATE, GENDER
+    </select>
+
+    <select id="getdatasalesTotal" resultType="salesdata">
+        SELECT SUM(PRICE) AS SUM,
+               ROUND(AVG(PRICE)) AS AVG,
+               MAX(PRICE) AS MAX,
+               MIN(PRICE) AS MIN
+        FROM (SELECT SUBSTR(TO_CHAR(RDATE, 'YYYYMMDD'), 1, 8) AS RDATE
+                , SUM (PRICE) AS PRICE
+            FROM SALES
+            GROUP BY SUBSTR(TO_CHAR(RDATE, 'YYYYMMDD'), 1, 8)
+            ORDER BY RDATE
+            )
+    </select>
+
+    <insert id="insert" parameterType="sales">
+        INSERT INTO sales
+        VALUES (TO_DATE(#{rdate}, 'YYYY-MM-DD'), #{price}, #{gender})
+    </insert>
+
+</mapper>
